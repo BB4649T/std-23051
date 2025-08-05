@@ -1,0 +1,14 @@
+package com.my.company.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
+import com.company.school.tsinjo_std21001.domain.Help;
+import java.util.List;
+
+@Repository
+public interface HelpRepository extends JpaRepository<Help, Long> {
+    
+    @Query("SELECT h FROM Help h JOIN FETCH h.beneficiary JOIN FETCH h.payment ORDER BY h.createdAt DESC")
+    List<Help> findAllByOrderByCreatedAtDesc();
+}
