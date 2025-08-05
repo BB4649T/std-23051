@@ -1,0 +1,46 @@
+th:classappend="${donation.payment.status == T(PaymentStatus).SUCCEEDED} ? 'bg-success' : (${donation.payment.status == T(PaymentStatus).FAILED} ? 'bg-danger' : 'bg-warning')"
+                                          th:text="${donation.payment.status}"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Aides -->
+                <h4 class="text-info mt-4">Aides accordées</h4>
+                <div th:if="${#lists.isEmpty(helps)}" class="alert alert-info">
+                    Aucune aide accordée pour le moment.
+                </div>
+                <div th:unless="${#lists.isEmpty(helps)}">
+                    <div th:each="help : ${helps}" class="card mb-2">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <strong th:text="${help.beneficiary.fullName}"></strong><br>
+                                    <small th:text="${help.beneficiary.email}"></small>
+                                </div>
+                                <div class="col-md-3">
+                                    <span th:text="${help.payment.amount} + ' EUR'"></span><br>
+                                    <small th:text="${help.payment.paymentMethod}"></small>
+                                </div>
+                                <div class="col-md-3">
+                                    <span th:text="${#temporals.format(help.payment.date, 'dd/MM/yyyy HH:mm')}"></span>
+                                </div>
+                                <div class="col-md-3">
+                                    <span class="badge bg-info" th:text="${help.payment.status}"></span>
+                                </div>
+                            </div>
+                            <div class="row mt-2">
+                                <div class="col-12">
+                                    <strong>Description de l'accident:</strong>
+                                    <p th:text="${help.accidentDescription}"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+                  </html>
